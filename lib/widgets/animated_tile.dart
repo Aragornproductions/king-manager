@@ -1,0 +1,84 @@
+import 'package:flutter/material.dart';
+
+/// A tile that scales down slightly and shows a ripple when pressed,
+/// and fades/slides in when it first appears in a list (for scroll animation).
+class AnimatedTile extends StatefulWidget {
+  final Widget child;
+    final VoidCallback? onTap;
+      final VoidCallback? onLongPress;
+        final int index;
+
+          const AnimatedTile({
+              super.key,
+                  required this.child,
+                      this.onTap,
+                          this.onLongPress,
+                              this.index = 0,
+                                });
+
+                                  @override
+                                    State<AnimatedTile> createState() => _AnimatedTileState();
+                                    }
+
+                                    class _AnimatedTileState extends State<AnimatedTile>
+                                        with SingleTickerProviderStateMixin {
+                                          late final AnimationController _controller;
+                                            bool _pressed = false;
+
+                                              @override
+                                                void initState() {
+                                                    super.initState();
+                                                        _controller = AnimationController(
+                                                              vsync: this,
+                                                                    duration: const Duration(milliseconds: 350),
+                                                                        );
+                                                                            Future.delayed(Duration(milliseconds: 30 * (widget.index % 12)), () {
+                                                                                  if (mounted) _controller.forward();
+                                                                                      });
+                                                                                        }
+
+                                                                                          @override
+                                                                                            void dispose() {
+                                                                                                _controller.dispose();
+                                                                                                    super.dispose();
+                                                                                                      }
+
+                                                                                                        @override
+                                                                                                          Widget build(BuildContext context) {
+                                                                                                              return AnimatedBuilder(
+                                                                                                                    animation: _controller,
+                                                                                                                          builder: (context, child) {
+                                                                                                                                  final t = Curves.easeOutCubic.transform(_controller.value);
+                                                                                                                                          return Opacity(
+                                                                                                                                                    opacity: t,
+                                                                                                                                                              child: Transform.translate(
+                                                                                                                                                                          offset: Offset(0, (1 - t) * 16),
+                                                                                                                                                                                      child: child,
+                                                                                                                                                                                                ),
+                                                                                                                                                                                                        );
+                                                                                                                                                                                                              },
+                                                                                                                                                                                                                    child: GestureDetector(
+                                                                                                                                                                                                                            onTapDown: (_) => setState(() => _pressed = true),
+                                                                                                                                                                                                                                    onTapUp: (_) => setState(() => _pressed = false),
+                                                                                                                                                                                                                                            onTapCancel: () => setState(() => _pressed = false),
+                                                                                                                                                                                                                                                    onTap: widget.onTap,
+                                                                                                                                                                                                                                                            onLongPress: widget.onLongPress,
+                                                                                                                                                                                                                                                                    child: AnimatedScale(
+                                                                                                                                                                                                                                                                              scale: _pressed ? 0.95 : 1.0,
+                                                                                                                                                                                                                                                                                        duration: const Duration(milliseconds: 120),
+                                                                                                                                                                                                                                                                                                  curve: Curves.easeOut,
+                                                                                                                                                                                                                                                                                                            child: Material(
+                                                                                                                                                                                                                                                                                                                        color: Colors.transparent,
+                                                                                                                                                                                                                                                                                                                                    borderRadius: BorderRadius.circular(16),
+                                                                                                                                                                                                                                                                                                                                                clipBehavior: Clip.antiAlias,
+                                                                                                                                                                                                                                                                                                                                                            child: InkWell(
+                                                                                                                                                                                                                                                                                                                                                                          onTap: widget.onTap,
+                                                                                                                                                                                                                                                                                                                                                                                        onLongPress: widget.onLongPress,
+                                                                                                                                                                                                                                                                                                                                                                                                      child: widget.child,
+                                                                                                                                                                                                                                                                                                                                                                                                                  ),
+                                                                                                                                                                                                                                                                                                                                                                                                                            ),
+                                                                                                                                                                                                                                                                                                                                                                                                                                    ),
+                                                                                                                                                                                                                                                                                                                                                                                                                                          ),
+                                                                                                                                                                                                                                                                                                                                                                                                                                              );
+                                                                                                                                                                                                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                                                                                                                                                                                                }
