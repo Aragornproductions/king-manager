@@ -1,0 +1,31 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1A0505"/>
+      <stop offset="100%" stop-color="#3A0A0A"/>
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FFE9A8"/>
+      <stop offset="50%" stop-color="#D4AF37"/>
+      <stop offset="100%" stop-color="#8A6D1F"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="512" height="512" rx="110" fill="url(#bg)"/>
+
+  <!-- Folder base -->
+  <path d="M96 190c0-13.3 10.7-24 24-24h84l28 32h164c13.3 0 24 10.7 24 24v170c0 13.3-10.7 24-24 24H120c-13.3 0-24-10.7-24-24V190z"
+        fill="url(#gold)"/>
+  <path d="M96 220h316v154c0 13.3-10.7 24-24 24H120c-13.3 0-24-10.7-24-24V220z"
+        fill="#B8860B" opacity="0.35"/>
+
+  <!-- Crown -->
+  <path d="M150 168l26 42 40-56 40 56 40-56 40 56 26-42-14 66c-1.6 7.4-8 12-15 12H179c-7 0-13.4-4.6-15-12l-14-66z"
+        fill="url(#gold)" stroke="#7A5A12" stroke-width="4" stroke-linejoin="round"/>
+  <circle cx="150" cy="164" r="12" fill="url(#gold)"/>
+  <circle cx="256" cy="150" r="13" fill="url(#gold)"/>
+  <circle cx="362" cy="164" r="12" fill="url(#gold)"/>
+
+  <text x="256" y="470" text-anchor="middle" font-family="Georgia, serif" font-size="40"
+        fill="#FFE9A8" font-weight="bold" letter-spacing="2">KING MANAGER</text>
+</svg>
